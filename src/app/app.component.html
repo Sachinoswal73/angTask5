@@ -4,13 +4,18 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Leave Mgt</a>
        
-        <div class="collapse navbar-collapse" id="navbarText">
-          <ul class="navbar-nav mr-auto">
+        <div id="navbarText">
+          <!-- <ul class="navbar-nav mr-auto">
             <li class="nav-item ">
               <a class="nav-link" routerLink="register">Register <span class="sr-only">(current)</span></a>
             </li>
-          </ul>
+          </ul> -->
           <span class="navbar-text">
+                <a routerLink="register">
+                  <button class="btn btn-deafult">
+                    Register
+                  </button>
+                </a>
                 <button class="btn btn-deafult"
                     (click)="onLogin()"
                     >
