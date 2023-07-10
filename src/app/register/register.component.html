@@ -1,0 +1,178 @@
+
+<div class="rowReg">
+
+    <div class="col-12 col-lg-6 mt-4">
+
+        <span class="badge badge-info p-2" *ngIf="formSubmitted">
+            You're now registered & you may <a routerLink="" class="text-dark">login</a> to continue.
+        </span>
+
+        <div class="registerForm p-4">
+            
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+                <div>  
+                    <!-- (click)="onSelect($event)"  -->
+                    <input type="radio" 
+                        name="designation"
+                        value="hod"
+                        formControlName="designation"
+                        >
+                        HOD
+                    &nbsp;&nbsp;&nbsp;
+                    <input type="radio" 
+                        name="designation" 
+                        value="staff"
+                        formControlName="designation"
+                        >
+                        STAFF
+                        <span class="badge badge-light"
+                            *ngIf="registerForm.get('designation').invalid && formSubmitted"
+                        >
+                        * This field is required.
+                        </span>
+                </div>
+
+                <div class="row mt-3">  
+                    <div class="form-group col-12 col-lg-6">
+                        <label for="firstName">First Name *</label>
+                        <input type="text" 
+                            name="" 
+                            id="firstName" 
+                            class="form-control"
+                            formControlName="firstName"
+                            >
+                            <span class="badge badge-light"
+                            *ngIf="registerForm.get('firstName').invalid && registerForm.get('firstName').touched"
+                            >
+                            * This field is required.
+                            </span>
+                    </div>
+                    <div class="form-group col-12 col-lg-6">
+                        <label for="lastName">Last Name *</label>
+                        <input type="text" 
+                            name="" 
+                            id="lastName" 
+                            class="form-control"
+                            formControlName="lastName"
+                            >
+                            <span class="badge badge-light"
+                            *ngIf="registerForm.get('lastName').invalid && registerForm.get('lastName').touched"
+                            >
+                            * This field is required.
+                            </span>
+                    </div>
+                </div>
+
+                <div class="row">  
+                    <div class="form-group col-12 col-lg-6">
+                        <label for="email">Email *</label>
+                        <input type="text" 
+                            name="" 
+                            id="email" 
+                            class="form-control"
+                            formControlName="email"
+                            >
+                            <span class="badge badge-light"
+                            *ngIf="registerForm.get('email').invalid && registerForm.get('email').touched"
+                            >
+                            * This field is required.
+                            </span>
+                    </div>
+                    <div class="form-group col-12 col-lg-6">
+                        <label for="contact">Contact *</label>
+                        <input type="text" 
+                            name="" 
+                            id="contact" 
+                            class="form-control"
+                            formControlName="contact"
+                            >
+                            <span class="badge badge-light"
+                            *ngIf="registerForm.get('contact').invalid && registerForm.get('contact').touched"
+                            >
+                            * This field is required.
+                            </span>
+                    </div>
+                </div>
+
+                <div class="row">  
+                    <div class="form-group col-12 col-lg-6">
+                        <label for="department">Department *</label>
+                        <select 
+                            name="department" 
+                            id=""
+                            class="form-control"
+                            formControlName="department"
+                            >
+                            <option
+                                value="science"
+                                >
+                                Science
+                            </option>
+                            <option 
+                                value="commerce"
+                                >
+                                Commerce
+                            </option>
+                            <option 
+                                value="arts"
+                                >
+                                Arts
+                            </option>
+                        </select>
+                        <span class="badge badge-light"
+                            *ngIf="registerForm.get('department').invalid && registerForm.get('department').touched"
+                            >
+                            * This field is required.
+                            </span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-12 col-lg-6">
+                        <label for="username">Username *</label>
+                        <input type="text" 
+                            name="" 
+                            id="username" 
+                            class="form-control"
+                            formControlName="username"
+                            >
+                            <span class="badge badge-light"
+                            *ngIf="registerForm.get('username').invalid && registerForm.get('username').touched"
+                            >
+                            * This field is required.
+                            </span>
+                    </div>
+                    <div class="form-group col-12 col-lg-6">
+                        <label for="password">Password *</label>
+                        <input type="password" 
+                            name="" 
+                            id="password" 
+                            class="form-control"
+                            formControlName="password"
+                            >
+                            <span class="badge badge-light"
+                            *ngIf="registerForm.get('password').invalid && registerForm.get('password').touched"
+                            >
+                            * This field is required.
+                            </span>
+                    </div>
+                </div>
+               
+                <button type="submit" class="btn btn-success btn-block mt-4"
+                    [disabled]="registerForm.invalid"
+                    >
+                    Register
+                </button>
+            </form>
+
+            <p class="text-center mt-4">Already registered ?  
+                <a routerLink="" class="font-weight-bold">
+                    Login.</a> 
+            </p>
+
+        </div>
+
+    </div>
+
+</div>

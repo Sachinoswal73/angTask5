@@ -1,0 +1,88 @@
+<div class="row">
+    
+    <div class="flex-container" 
+      *ngIf="totalAppliedLeaves == 0">
+        <div>
+            <p class="text-dark">
+                No Leave request available
+            </p>
+        </div>
+    </div>
+
+
+   
+    <div class="jumbotron w-100 m-4 p-4" 
+      *ngIf="totalAppliedLeaves > 0"
+      >
+       
+        <p class="lead text-center">
+            Mr. {{ currentUser?.firstName + ' ' + currentUser?.lastName }} 
+             <span style="font-size: 14px;"> 
+                ( Department - {{ staffDepartment }} | Designation - HOD )
+            </span>
+        </p>
+      
+        
+        <hr class="my-4">
+
+        <div class="row">
+
+              <div class="card col-12 col-lg-4 mb-2"
+                *ngFor="let ula of userLeaveApplications"
+                >
+                <div class="card-body"
+                    
+                    >
+                  <h3 class="card-title">{{ ula.firstName }} {{ ula.lastName }}</h3>
+                  <p class="card-text">
+                    Leave from <b>{{ ula.fromDate }}</b> to <b>{{ ula.toDate }}</b> 
+                    <br>
+                    Number of days - <b>{{ ula.totalDays }}</b>
+                  </p>
+                  
+                  <h5 class="card-title">Reason</h5>
+                  <h6 class="card-subtitle text-muted">
+                    {{ ula.reason }} </h6>
+                
+                    <div *ngIf="ula.status == 'Pending'">
+                        <button class="btn btn-success btn-sm mt-3"
+                        (click)="changeStatus(ula.lid, 'Approved')"
+                        >
+                        Approve
+                        </button>
+
+                        <button class="btn btn-danger btn-sm mx-2 mt-3"
+                        (click)="changeStatus(ula.lid, 'Rejected')"
+                        >
+                        Reject
+                        </button>
+
+                    </div>
+                   
+                    <div *ngIf="ula.status !== 'Pending'">
+                        <h1 class="card-title mt-3">Status -
+                            <span class="p-1"
+                                [ngClass]="ula.status == 'Approved' ? 'text-success' : 'text-danger'"    
+                                style="font-size:1.5rem;"
+                                > 
+                                &#10003; {{ ula.status }} </span> 
+                        </h1> 
+                    </div>
+
+                  <!-- <h5 class="card-title mt-3">Status -
+                    <span class="badge badge-warning p-1"> {{ ula.status }} </span> </h5> -->
+                </div>
+            </div>
+
+        </div>
+        
+
+       
+
+
+      </div>
+
+
+</div>
+
+

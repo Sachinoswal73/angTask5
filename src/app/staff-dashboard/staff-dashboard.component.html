@@ -1,0 +1,137 @@
+<div class="row">
+    
+    <div class="flex-container" 
+      *ngIf="totalAppliedLeaves == 0">
+        <div>
+            <p class="text-info">
+                Not applied any leave yet
+            </p>
+        </div>
+        <div>
+            <button class="btn btn-warning btn-sm"
+                type="button" data-toggle="modal" data-target="#exampleModal"
+                >
+                + Apply Leave
+            </button>
+        </div> 
+    </div>
+
+
+    
+    <div class="jumbotron w-100 m-4 p-4" 
+      *ngIf="totalAppliedLeaves > 0"
+      >
+       
+        <p class="lead text-center">
+            Mr. {{ currentUser?.firstName + ' ' + currentUser?.lastName }} 
+             <span style="font-size: 14px;"> 
+                ( Department - {{ staffDepartment }} | Designation - Staff )
+            </span>
+        </p>
+        <p class="text-center">Total Leaves - <b> {{ totalAppliedLeaves }}</b> &nbsp;&nbsp; | &nbsp;&nbsp; Approved Leaves - <b> {{ approvedLeaves }} </b> &nbsp;&nbsp; | &nbsp;&nbsp; Rejected Leaves - <b> {{ rejectedLeaves }} </b> &nbsp;&nbsp; | &nbsp;&nbsp; Pending Leaves - <b> {{ pendingLeaves }} </b> </p>
+        
+        <hr class="my-4">
+
+        <div class="row">
+
+              <div class="card col-12 col-lg-3 mb-2"
+                *ngFor="let ula of userLeaveApplications"
+                >
+                <div class="card-body">
+                  <p class="card-text">
+                    Leave from <b>{{ ula.fromDate | date }}</b> to <b>{{ ula.toDate | date}}</b> 
+                    <br>
+                    Number of days - <b>{{ ula.totalDays }}</b>
+                  </p>
+                  
+                  <h5 class="card-title">Reason</h5>
+                  <h6 class="card-subtitle text-muted">
+                    {{ ula.reason }} </h6>
+                
+                  <h5 class="card-title mt-3">Status -
+                    <span class="badge p-1"
+                      [ngClass]="ula.status == 'Approved' ? 'badge-success' : 'badge-warning'"
+                      > 
+                      {{ ula.status }} 
+                    </span> </h5>
+                </div>
+            </div>
+
+        </div>
+        
+        <hr class="my-4">
+
+        <div class="text-center">
+          <button class="btn btn-primary btn-sm"
+              type="button" data-toggle="modal" data-target="#exampleModal"
+              >
+              Apply for Leaves
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Button trigger modal -->
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Leave Details</h5>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="leaveForm" (ngSubmit)="applyForLeave()">
+                    
+                      <div class="row">
+                        <div class="form-group col-6">
+                            <label for="fromDate">From</label>
+                            <input type="date"
+                            min="{{ date | date:'yyyy-MM-dd'}}"
+                            id="fromDate" 
+                            formControlName="fromDate"
+                            class="form-control">
+                          </div>
+                          <div class="form-group col-6">
+                              <label for="toDate">To</label>
+                              <input type="date"
+                              min="{{ date | date:'yyyy-MM-dd'}}" 
+                              id="toDate" 
+                              formControlName="toDate"
+                              class="form-control">
+                            </div>
+                      </div>
+
+                      <label for="reason">
+                        Reason
+                        <span class="badge badge-warning"
+                                *ngIf="leaveForm.get('reason').invalid && leaveForm.get('reason').touched"
+                                >
+                                &nbsp; * This field is required.
+                       </span> 
+                        </label>
+                      <textarea 
+                        name="" 
+                        id="reason" 
+                        cols="16" rows="3"
+                        formControlName="reason"
+                        class="form-control"
+                        >
+                      </textarea>
+                      
+                    <button type="submit" 
+                        class="btn btn-success mt-4"
+                        [disabled]="leaveForm.invalid"
+                        >
+                        Apply for Leave
+                    </button>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+</div>
+
+
