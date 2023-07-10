@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpHandlerService } from '../shared/httpHandler.service';
 import { NewUserModel } from '../shared/newUser.model';
+import { UniqueUserAsyncValidators } from '../shared/uniqueUserAsync.validator';
 
 @Component({
   selector: 'app-register',
@@ -30,7 +31,7 @@ export class RegisterComponent implements OnInit {
             email : new FormControl('', Validators.required),      
             contact : new FormControl('', Validators.required),            
             department : new FormControl('', Validators.required),   
-            username : new FormControl('', Validators.required),  
+            username : new FormControl('', [Validators.required], UniqueUserAsyncValidators.checkUsernames(this.httpHndlr)),  
             password : new FormControl('', Validators.required)      
         })
 

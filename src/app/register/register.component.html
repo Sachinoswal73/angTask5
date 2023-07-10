@@ -137,11 +137,22 @@
                             class="form-control"
                             formControlName="username"
                             >
+                            <span class="w10"
+                                *ngIf="registerForm.get('username').pending"
+                                >
+                                <img src="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/attachments/delivery/asset/c49c83ef51b0c4230f8f39560b8250a3-1596267998/navy_for-light_bg/make-animated-logo-loader-for-your-website.gif" alt="" width="20%">
+                            </span>
+                            <span class="badge badge-danger"
+                            *ngIf="registerForm.get('username').errors?.alreadyExists && registerForm.get('username').dirty"
+                            >
+                            * This username already exists.
+                            </span>
                             <span class="badge badge-light"
-                            *ngIf="registerForm.get('username').invalid && registerForm.get('username').touched"
+                            *ngIf="registerForm.get('username').errors?.required && registerForm.get('username').touched"
                             >
                             * This field is required.
                             </span>
+                            
                     </div>
                     <div class="form-group col-12 col-lg-6">
                         <label for="password">Password *</label>
