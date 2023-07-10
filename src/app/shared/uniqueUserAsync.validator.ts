@@ -22,7 +22,7 @@ export class UniqueUserAsyncValidators {
 
         return ( iVal : AbstractControl ) : Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
             return new Promise( ( resolve ) => {
-               setTimeout( () => {
+               
                     if ( unames.includes(iVal.value) ) {
                         // console.log('in promise');
                         resolve({alreadyExists : true});
@@ -30,7 +30,7 @@ export class UniqueUserAsyncValidators {
                     else {
                         resolve(null);
                     }
-                }, 700 )
+                
             } )
         }
     }
